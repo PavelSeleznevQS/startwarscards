@@ -4,8 +4,13 @@
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^5.14.3",
+    "@mui/x-date-pickers": "^6.11.2",
+    "@tanstack/query-sync-storage-persister": "^4.33.0",
+    "@tanstack/react-query-persist-client": "^4.33.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.4",
+    "react-hook-form-mui": "^6.5.1",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.11",
@@ -55,6 +60,7 @@
     "@types/node": "^16.18.40",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
+    "@types/react-query": "^1.2.9",
     "@types/styled-components": "^5.1.26"
   }
 }

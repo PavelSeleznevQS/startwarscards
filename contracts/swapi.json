@@ -9,37 +9,6 @@
   "basePath": "",
   "schemes": ["https", "http"],
   "paths": {
-    "/api/films": {
-      "get": {
-        "operationId": "getFilms",
-        "description": "Get all films.",
-        "responses": {
-          "200": {
-            "description": "An array of films.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/film"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "apikeyQuery": []
-          }
-        ],
-        "x-tests": [
-          {
-            "description": "success",
-            "response": {
-              "status": 200
-            }
-          }
-        ],
-        "tags": ["films"]
-      }
-    },
     "/api/films/{id}": {
       "get": {
         "operationId": "getFilmById",
@@ -57,10 +26,7 @@
           "200": {
             "description": "A film.",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/film"
-              }
+              "$ref": "#/definitions/film"
             }
           }
         },
@@ -153,29 +119,6 @@
         "tags": ["people"]
       }
     },
-    "/api/planets": {
-      "get": {
-        "operationId": "getPlanets",
-        "description": "Get all planets.",
-        "responses": {
-          "200": {
-            "description": "An array of planets.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/planet"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "apikeyQuery": []
-          }
-        ],
-        "tags": ["planets"]
-      }
-    },
     "/api/planets/{id}": {
       "get": {
         "operationId": "getPlanetById",
@@ -193,10 +136,7 @@
           "200": {
             "description": "A planet.",
             "schema": {
-              "type": "object",
-              "items": {
-                "$ref": "#/definitions/planet"
-              }
+              "$ref": "#/definitions/planet"
             }
           }
         },
@@ -206,6 +146,93 @@
           }
         ],
         "tags": ["planets"]
+      }
+    },
+    "/api/vehicles/{id}": {
+      "get": {
+        "operationId": "getVehicleById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the vehicle."
+          }
+        ],
+        "description": "Get a specific vehicle by id.",
+        "responses": {
+          "200": {
+            "description": "A vehicle.",
+            "schema": {
+              "$ref": "#/definitions/vehicle"
+            }
+          }
+        },
+        "security": [
+          {
+            "apikeyQuery": []
+          }
+        ],
+        "tags": ["vehicles"]
+      }
+    },
+    "/api/starships/{id}": {
+      "get": {
+        "operationId": "getStarshipById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the starship."
+          }
+        ],
+        "description": "Get a specific starship by id.",
+        "responses": {
+          "200": {
+            "description": "A starship.",
+            "schema": {
+              "$ref": "#/definitions/starship"
+            }
+          }
+        },
+        "security": [
+          {
+            "apikeyQuery": []
+          }
+        ],
+        "tags": ["starships"]
+      }
+    },
+    "/api/species/{id}": {
+      "get": {
+        "operationId": "getSpeciesById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Id of the species."
+          }
+        ],
+        "description": "Get a specific species by id.",
+        "responses": {
+          "200": {
+            "description": "A species.",
+            "schema": {
+              "$ref": "#/definitions/species"
+            }
+          }
+        },
+        "security": [
+          {
+            "apikeyQuery": []
+          }
+        ],
+        "tags": ["species"]
       }
     }
   },

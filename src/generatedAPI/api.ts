@@ -15,3 +15,6 @@
 export * from "./api/films-api";
 export * from "./api/people-api";
 export * from "./api/planets-api";
+export * from "./api/species-api";
+export * from "./api/starships-api";
+export * from "./api/vehicles-api";

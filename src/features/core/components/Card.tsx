@@ -1,13 +1,15 @@
 import React, {FC, memo} from "react";
 import {Button, Typography, Card as MuiCard, CardActions, CardContent, CardMedia} from '@mui/material';
 import {styled} from '@mui/material/styles';
-import {Person} from 'src/generatedAPI/models/person';
+import {Link} from 'react-router-dom';
+import {IPerson} from 'src/features/person/services/PersonService';
 
 const PREFIX = 'Card';
 const classes = {
   img: `${PREFIX}-img`,
   title: `${PREFIX}-title`,
   pos: `${PREFIX}-pos`,
+  link: `${PREFIX}-link`,
 }
 
 const StyledCard = styled(MuiCard)({
@@ -24,10 +26,14 @@ const StyledCard = styled(MuiCard)({
   [`& .${classes.pos}`]: {
     marginBottom: 12
   },
+
+  [`& .${classes.link}`]: {
+
+  },
 })
 
 interface IProps {
-  person: Person & {id: string}
+  person: IPerson
 }
 
 const Card: FC<IProps> = ({person}: IProps) => {
@@ -37,7 +43,7 @@ const Card: FC<IProps> = ({person}: IProps) => {
         component="img"
         className={classes.img}
         alt={person.name}
-        image={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`}
+        image={person.imgSrc}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -45,9 +51,11 @@ const Card: FC<IProps> = ({person}: IProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" size="medium">
-          Learn More
-        </Button>
+        <Link className={classes.link} to={`/persons/${person.id}`}>
+          <Button variant="outlined" size="medium">
+            Learn More
+          </Button>
+        </Link>
       </CardActions>
     </StyledCard>
   );

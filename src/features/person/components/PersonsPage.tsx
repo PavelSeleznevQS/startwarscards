@@ -23,7 +23,6 @@ const PersonsPage = () => {
   const {data, isFetching} = useQuery({
     queryKey: [PERSONS_KEY, {page, search: debouncedSearch}],
     queryFn: ({queryKey}) => PersonService.getPeople(queryKey[1] as PeopleApiGetPeopleRequest),
-    keepPreviousData: true
   });
 
   const handlePageChange = useCallback((event: React.ChangeEvent<unknown>, value: number) => {

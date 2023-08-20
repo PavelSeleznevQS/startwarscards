@@ -38,28 +38,28 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { Film } from "../models";
+import { Starship } from "../models";
 /**
- * FilmsApi - axios parameter creator
+ * StarshipsApi - axios parameter creator
  * @export
  */
-export const FilmsApiAxiosParamCreator = function (
+export const StarshipsApiAxiosParamCreator = function (
   configuration?: Configuration,
 ) {
   return {
     /**
-     * Get a specific film by id.
-     * @param {string} id Id of the film.
+     * Get a specific starship by id.
+     * @param {string} id Id of the starship.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFilmById: async (
+    getStarshipById: async (
       id: string,
       options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'id' is not null or undefined
-      assertParamExists("getFilmById", "id", id);
-      const localVarPath = `/api/films/{id}`.replace(
+      assertParamExists("getStarshipById", "id", id);
+      const localVarPath = `/api/starships/{id}`.replace(
         `{${"id"}}`,
         encodeURIComponent(String(id)),
       );
@@ -99,25 +99,26 @@ export const FilmsApiAxiosParamCreator = function (
 };
 
 /**
- * FilmsApi - functional programming interface
+ * StarshipsApi - functional programming interface
  * @export
  */
-export const FilmsApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = FilmsApiAxiosParamCreator(configuration);
+export const StarshipsApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    StarshipsApiAxiosParamCreator(configuration);
   return {
     /**
-     * Get a specific film by id.
-     * @param {string} id Id of the film.
+     * Get a specific starship by id.
+     * @param {string} id Id of the starship.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getFilmById(
+    async getStarshipById(
       id: string,
       options?: AxiosRequestConfig,
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Film>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Starship>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getFilmById(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getStarshipById(
         id,
         options,
       );
@@ -132,67 +133,67 @@ export const FilmsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * FilmsApi - factory interface
+ * StarshipsApi - factory interface
  * @export
  */
-export const FilmsApiFactory = function (
+export const StarshipsApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance,
 ) {
-  const localVarFp = FilmsApiFp(configuration);
+  const localVarFp = StarshipsApiFp(configuration);
   return {
     /**
-     * Get a specific film by id.
-     * @param {FilmsApiGetFilmByIdRequest} requestParameters Request parameters.
+     * Get a specific starship by id.
+     * @param {StarshipsApiGetStarshipByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFilmById(
-      requestParameters: FilmsApiGetFilmByIdRequest,
+    getStarshipById(
+      requestParameters: StarshipsApiGetStarshipByIdRequest,
       options?: AxiosRequestConfig,
-    ): AxiosPromise<Film> {
+    ): AxiosPromise<Starship> {
       return localVarFp
-        .getFilmById(requestParameters.id, options)
+        .getStarshipById(requestParameters.id, options)
         .then((request) => request(axios, basePath));
     },
   };
 };
 
 /**
- * Request parameters for getFilmById operation in FilmsApi.
+ * Request parameters for getStarshipById operation in StarshipsApi.
  * @export
- * @interface FilmsApiGetFilmByIdRequest
+ * @interface StarshipsApiGetStarshipByIdRequest
  */
-export interface FilmsApiGetFilmByIdRequest {
+export interface StarshipsApiGetStarshipByIdRequest {
   /**
-   * Id of the film.
+   * Id of the starship.
    * @type {string}
-   * @memberof FilmsApiGetFilmById
+   * @memberof StarshipsApiGetStarshipById
    */
   readonly id: string;
 }
 
 /**
- * FilmsApi - object-oriented interface
+ * StarshipsApi - object-oriented interface
  * @export
- * @class FilmsApi
+ * @class StarshipsApi
  * @extends {BaseAPI}
  */
-export class FilmsApi extends BaseAPI {
+export class StarshipsApi extends BaseAPI {
   /**
-   * Get a specific film by id.
-   * @param {FilmsApiGetFilmByIdRequest} requestParameters Request parameters.
+   * Get a specific starship by id.
+   * @param {StarshipsApiGetStarshipByIdRequest} requestParameters Request parameters.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof FilmsApi
+   * @memberof StarshipsApi
    */
-  public getFilmById(
-    requestParameters: FilmsApiGetFilmByIdRequest,
+  public getStarshipById(
+    requestParameters: StarshipsApiGetStarshipByIdRequest,
     options?: AxiosRequestConfig,
   ) {
-    return FilmsApiFp(this.configuration)
-      .getFilmById(requestParameters.id, options)
+    return StarshipsApiFp(this.configuration)
+      .getStarshipById(requestParameters.id, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

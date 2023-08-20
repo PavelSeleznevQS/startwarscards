@@ -95,47 +95,6 @@ export const PlanetsApiAxiosParamCreator = function (
         options: localVarRequestOptions,
       };
     },
-    /**
-     * Get all planets.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getPlanets: async (
-      options: AxiosRequestConfig = {},
-    ): Promise<RequestArgs> => {
-      const localVarPath = `/api/planets`;
-      // use dummy base URL string because the URL constructor only accepts absolute URLs.
-      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-      let baseOptions;
-      if (configuration) {
-        baseOptions = configuration.baseOptions;
-      }
-
-      const localVarRequestOptions = {
-        method: "GET",
-        ...baseOptions,
-        ...options,
-      };
-      const localVarHeaderParameter = {} as any;
-      const localVarQueryParameter = {} as any;
-
-      // authentication apikeyQuery required
-      await setApiKeyToObject(localVarQueryParameter, "code", configuration);
-
-      setSearchParams(localVarUrlObj, localVarQueryParameter);
-      let headersFromBaseOptions =
-        baseOptions && baseOptions.headers ? baseOptions.headers : {};
-      localVarRequestOptions.headers = {
-        ...localVarHeaderParameter,
-        ...headersFromBaseOptions,
-        ...options.headers,
-      };
-
-      return {
-        url: toPathString(localVarUrlObj),
-        options: localVarRequestOptions,
-      };
-    },
   };
 };
 
@@ -156,31 +115,12 @@ export const PlanetsApiFp = function (configuration?: Configuration) {
       id: string,
       options?: AxiosRequestConfig,
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Planet>>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Planet>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.getPlanetById(
         id,
         options,
       );
-      return createRequestFunction(
-        localVarAxiosArgs,
-        globalAxios,
-        BASE_PATH,
-        configuration,
-      );
-    },
-    /**
-     * Get all planets.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    async getPlanets(
-      options?: AxiosRequestConfig,
-    ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Planet>>
-    > {
-      const localVarAxiosArgs =
-        await localVarAxiosParamCreator.getPlanets(options);
       return createRequestFunction(
         localVarAxiosArgs,
         globalAxios,
@@ -211,19 +151,9 @@ export const PlanetsApiFactory = function (
     getPlanetById(
       requestParameters: PlanetsApiGetPlanetByIdRequest,
       options?: AxiosRequestConfig,
-    ): AxiosPromise<Array<Planet>> {
+    ): AxiosPromise<Planet> {
       return localVarFp
         .getPlanetById(requestParameters.id, options)
-        .then((request) => request(axios, basePath));
-    },
-    /**
-     * Get all planets.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    getPlanets(options?: AxiosRequestConfig): AxiosPromise<Array<Planet>> {
-      return localVarFp
-        .getPlanets(options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -263,18 +193,6 @@ export class PlanetsApi extends BaseAPI {
   ) {
     return PlanetsApiFp(this.configuration)
       .getPlanetById(requestParameters.id, options)
-      .then((request) => request(this.axios, this.basePath));
-  }
-
-  /**
-   * Get all planets.
-   * @param {*} [options] Override http request option.
-   * @throws {RequiredError}
-   * @memberof PlanetsApi
-   */
-  public getPlanets(options?: AxiosRequestConfig) {
-    return PlanetsApiFp(this.configuration)
-      .getPlanets(options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

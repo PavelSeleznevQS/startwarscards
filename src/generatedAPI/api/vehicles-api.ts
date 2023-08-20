@@ -38,28 +38,28 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { Film } from "../models";
+import { Vehicle } from "../models";
 /**
- * FilmsApi - axios parameter creator
+ * VehiclesApi - axios parameter creator
  * @export
  */
-export const FilmsApiAxiosParamCreator = function (
+export const VehiclesApiAxiosParamCreator = function (
   configuration?: Configuration,
 ) {
   return {
     /**
-     * Get a specific film by id.
-     * @param {string} id Id of the film.
+     * Get a specific vehicle by id.
+     * @param {string} id Id of the vehicle.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFilmById: async (
+    getVehicleById: async (
       id: string,
       options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'id' is not null or undefined
-      assertParamExists("getFilmById", "id", id);
-      const localVarPath = `/api/films/{id}`.replace(
+      assertParamExists("getVehicleById", "id", id);
+      const localVarPath = `/api/vehicles/{id}`.replace(
         `{${"id"}}`,
         encodeURIComponent(String(id)),
       );
@@ -99,25 +99,25 @@ export const FilmsApiAxiosParamCreator = function (
 };
 
 /**
- * FilmsApi - functional programming interface
+ * VehiclesApi - functional programming interface
  * @export
  */
-export const FilmsApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = FilmsApiAxiosParamCreator(configuration);
+export const VehiclesApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = VehiclesApiAxiosParamCreator(configuration);
   return {
     /**
-     * Get a specific film by id.
-     * @param {string} id Id of the film.
+     * Get a specific vehicle by id.
+     * @param {string} id Id of the vehicle.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getFilmById(
+    async getVehicleById(
       id: string,
       options?: AxiosRequestConfig,
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Film>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Vehicle>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getFilmById(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getVehicleById(
         id,
         options,
       );
@@ -132,67 +132,67 @@ export const FilmsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * FilmsApi - factory interface
+ * VehiclesApi - factory interface
  * @export
  */
-export const FilmsApiFactory = function (
+export const VehiclesApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance,
 ) {
-  const localVarFp = FilmsApiFp(configuration);
+  const localVarFp = VehiclesApiFp(configuration);
   return {
     /**
-     * Get a specific film by id.
-     * @param {FilmsApiGetFilmByIdRequest} requestParameters Request parameters.
+     * Get a specific vehicle by id.
+     * @param {VehiclesApiGetVehicleByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFilmById(
-      requestParameters: FilmsApiGetFilmByIdRequest,
+    getVehicleById(
+      requestParameters: VehiclesApiGetVehicleByIdRequest,
       options?: AxiosRequestConfig,
-    ): AxiosPromise<Film> {
+    ): AxiosPromise<Vehicle> {
       return localVarFp
-        .getFilmById(requestParameters.id, options)
+        .getVehicleById(requestParameters.id, options)
         .then((request) => request(axios, basePath));
     },
   };
 };
 
 /**
- * Request parameters for getFilmById operation in FilmsApi.
+ * Request parameters for getVehicleById operation in VehiclesApi.
  * @export
- * @interface FilmsApiGetFilmByIdRequest
+ * @interface VehiclesApiGetVehicleByIdRequest
  */
-export interface FilmsApiGetFilmByIdRequest {
+export interface VehiclesApiGetVehicleByIdRequest {
   /**
-   * Id of the film.
+   * Id of the vehicle.
    * @type {string}
-   * @memberof FilmsApiGetFilmById
+   * @memberof VehiclesApiGetVehicleById
    */
   readonly id: string;
 }
 
 /**
- * FilmsApi - object-oriented interface
+ * VehiclesApi - object-oriented interface
  * @export
- * @class FilmsApi
+ * @class VehiclesApi
  * @extends {BaseAPI}
  */
-export class FilmsApi extends BaseAPI {
+export class VehiclesApi extends BaseAPI {
   /**
-   * Get a specific film by id.
-   * @param {FilmsApiGetFilmByIdRequest} requestParameters Request parameters.
+   * Get a specific vehicle by id.
+   * @param {VehiclesApiGetVehicleByIdRequest} requestParameters Request parameters.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof FilmsApi
+   * @memberof VehiclesApi
    */
-  public getFilmById(
-    requestParameters: FilmsApiGetFilmByIdRequest,
+  public getVehicleById(
+    requestParameters: VehiclesApiGetVehicleByIdRequest,
     options?: AxiosRequestConfig,
   ) {
-    return FilmsApiFp(this.configuration)
-      .getFilmById(requestParameters.id, options)
+    return VehiclesApiFp(this.configuration)
+      .getVehicleById(requestParameters.id, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

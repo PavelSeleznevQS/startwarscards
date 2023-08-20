@@ -38,28 +38,28 @@ import {
   RequiredError,
 } from "../base";
 // @ts-ignore
-import { Film } from "../models";
+import { Species } from "../models";
 /**
- * FilmsApi - axios parameter creator
+ * SpeciesApi - axios parameter creator
  * @export
  */
-export const FilmsApiAxiosParamCreator = function (
+export const SpeciesApiAxiosParamCreator = function (
   configuration?: Configuration,
 ) {
   return {
     /**
-     * Get a specific film by id.
-     * @param {string} id Id of the film.
+     * Get a specific species by id.
+     * @param {string} id Id of the species.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFilmById: async (
+    getSpeciesById: async (
       id: string,
       options: AxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'id' is not null or undefined
-      assertParamExists("getFilmById", "id", id);
-      const localVarPath = `/api/films/{id}`.replace(
+      assertParamExists("getSpeciesById", "id", id);
+      const localVarPath = `/api/species/{id}`.replace(
         `{${"id"}}`,
         encodeURIComponent(String(id)),
       );
@@ -99,25 +99,25 @@ export const FilmsApiAxiosParamCreator = function (
 };
 
 /**
- * FilmsApi - functional programming interface
+ * SpeciesApi - functional programming interface
  * @export
  */
-export const FilmsApiFp = function (configuration?: Configuration) {
-  const localVarAxiosParamCreator = FilmsApiAxiosParamCreator(configuration);
+export const SpeciesApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator = SpeciesApiAxiosParamCreator(configuration);
   return {
     /**
-     * Get a specific film by id.
-     * @param {string} id Id of the film.
+     * Get a specific species by id.
+     * @param {string} id Id of the species.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async getFilmById(
+    async getSpeciesById(
       id: string,
       options?: AxiosRequestConfig,
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Film>
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Species>
     > {
-      const localVarAxiosArgs = await localVarAxiosParamCreator.getFilmById(
+      const localVarAxiosArgs = await localVarAxiosParamCreator.getSpeciesById(
         id,
         options,
       );
@@ -132,67 +132,67 @@ export const FilmsApiFp = function (configuration?: Configuration) {
 };
 
 /**
- * FilmsApi - factory interface
+ * SpeciesApi - factory interface
  * @export
  */
-export const FilmsApiFactory = function (
+export const SpeciesApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance,
 ) {
-  const localVarFp = FilmsApiFp(configuration);
+  const localVarFp = SpeciesApiFp(configuration);
   return {
     /**
-     * Get a specific film by id.
-     * @param {FilmsApiGetFilmByIdRequest} requestParameters Request parameters.
+     * Get a specific species by id.
+     * @param {SpeciesApiGetSpeciesByIdRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    getFilmById(
-      requestParameters: FilmsApiGetFilmByIdRequest,
+    getSpeciesById(
+      requestParameters: SpeciesApiGetSpeciesByIdRequest,
       options?: AxiosRequestConfig,
-    ): AxiosPromise<Film> {
+    ): AxiosPromise<Species> {
       return localVarFp
-        .getFilmById(requestParameters.id, options)
+        .getSpeciesById(requestParameters.id, options)
         .then((request) => request(axios, basePath));
     },
   };
 };
 
 /**
- * Request parameters for getFilmById operation in FilmsApi.
+ * Request parameters for getSpeciesById operation in SpeciesApi.
  * @export
- * @interface FilmsApiGetFilmByIdRequest
+ * @interface SpeciesApiGetSpeciesByIdRequest
  */
-export interface FilmsApiGetFilmByIdRequest {
+export interface SpeciesApiGetSpeciesByIdRequest {
   /**
-   * Id of the film.
+   * Id of the species.
    * @type {string}
-   * @memberof FilmsApiGetFilmById
+   * @memberof SpeciesApiGetSpeciesById
    */
   readonly id: string;
 }
 
 /**
- * FilmsApi - object-oriented interface
+ * SpeciesApi - object-oriented interface
  * @export
- * @class FilmsApi
+ * @class SpeciesApi
  * @extends {BaseAPI}
  */
-export class FilmsApi extends BaseAPI {
+export class SpeciesApi extends BaseAPI {
   /**
-   * Get a specific film by id.
-   * @param {FilmsApiGetFilmByIdRequest} requestParameters Request parameters.
+   * Get a specific species by id.
+   * @param {SpeciesApiGetSpeciesByIdRequest} requestParameters Request parameters.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof FilmsApi
+   * @memberof SpeciesApi
    */
-  public getFilmById(
-    requestParameters: FilmsApiGetFilmByIdRequest,
+  public getSpeciesById(
+    requestParameters: SpeciesApiGetSpeciesByIdRequest,
     options?: AxiosRequestConfig,
   ) {
-    return FilmsApiFp(this.configuration)
-      .getFilmById(requestParameters.id, options)
+    return SpeciesApiFp(this.configuration)
+      .getSpeciesById(requestParameters.id, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
