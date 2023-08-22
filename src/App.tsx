@@ -10,6 +10,7 @@ import {Link as MuiLink, Typography} from '@mui/material';
 import {People, Person} from '@mui/icons-material';
 import {styled} from '@mui/material/styles';
 import {common} from '@mui/material/colors';
+import ErrorBoundary from 'src/features/core/components/ErrorBoundary';
 
 const PersonsPage = lazy(() => import('./features/person/components/PersonsPage'));
 const PersonPage = lazy(() => import('./features/person/components/PersonPage'));
@@ -47,16 +48,24 @@ const StyledLink = styled(MuiLink)(({theme: {spacing}}) => ({
   },
 }));
 
+enum Routes {
+  ANY = '*',
+  HOME = '/',
+  PERSON = '/persons/:id',
+  PERSONS = '/persons',
+}
+
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: Routes.HOME,
     element: <Layout />,
+    ErrorBoundary,
     children: [
       {
-        path: "/persons",
+        path: Routes.PERSONS,
         handle: {
           crumb: () => (
-            <StyledLink href="/persons/">
+            <StyledLink href={Routes.PERSONS}>
               <People fontSize="large" className={classes.icon} />
               <Typography variant="h5">Persons</Typography>
             </StyledLink>
@@ -68,11 +77,11 @@ const router = createBrowserRouter([
             element: <PersonsPage />,
           },
           {
-            path: "/persons/:id",
+            path: Routes.PERSON,
             element: <PersonPage />,
             handle: {
               crumb: () => (
-                <StyledLink href="/persons/">
+                <StyledLink href={Routes.PERSONS}>
                   <Person fontSize="large" className={classes.icon} />
                   <Typography variant="h5">Person</Typography>
                 </StyledLink>
@@ -83,10 +92,10 @@ const router = createBrowserRouter([
       },
       {
         index: true,
-        element: <Navigate to="/persons" replace />,
+        element: <Navigate to={Routes.PERSONS} replace />,
       },
       {
-        path: "*",
+        path: Routes.ANY,
         element: <NotFound />,
       }
     ]
