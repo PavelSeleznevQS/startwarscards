@@ -2,7 +2,7 @@ import React, {FC, memo, useCallback, useState} from 'react';
 import {styled} from '@mui/material/styles';
 import {Box, Button, Grid, Link, Paper, Typography} from '@mui/material';
 import {useParams} from 'react-router-dom';
-import PersonService, {INamedEntity} from 'src/features/person/services/PersonService';
+import PersonService, {INamedEntity, IPerson} from 'src/features/person/services/PersonService';
 import useSpecifiedQuery from 'src/features/core/hooks/useSpecifiedQuery';
 import PersonDetails from 'src/features/person/components/PersonDetails';
 import PersonForm from './PersonForm';
@@ -51,7 +51,7 @@ const PersonPage: FC = () => {
   const {data: films} = useSpecifiedQuery({key: FILMS_KEY, params:  person?.films, method: PersonService.getFilms, enabled: !!person?.films})
   const {data: species} = useSpecifiedQuery({key: SPECIES_KEY, params:  person?.species, method: PersonService.getSpecies, enabled: !!person?.species})
 
-  const onSubmit = useCallback((data: any) => {
+  const onSubmit = useCallback((data: IPerson) => {
     //direct update
     queryClient.setQueryData([PERSON_KEY, id], {...person, ...data})
     setIsEditing(false);

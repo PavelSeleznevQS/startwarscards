@@ -1,18 +1,18 @@
 import {useQuery} from '@tanstack/react-query';
 import {IPerson} from 'src/features/person/services/PersonService';
 
-type ArgumentsType<T> = {
+type ArgumentsType<QT, T> = {
   key: string,
-  params: any,
-  method: (args: any) => Promise<T>
+  params?: QT,
+  method: (arg: QT) => Promise<T>
   enabled?: boolean
 }
 
-function useSpecifiedQuery<T = IPerson>(args: ArgumentsType<T>) {
+function useSpecifiedQuery<QT extends string | string[] = string[], T = IPerson>(args: ArgumentsType<QT, T>) {
   const {key, params, method, enabled = true} = args;
   return useQuery<T, {message: string}>({
     queryKey: [key, params],
-    queryFn: ({queryKey}) => method(queryKey[1] as string),
+    queryFn: ({queryKey}) => method(queryKey[1] as QT),
     enabled
   });
 }

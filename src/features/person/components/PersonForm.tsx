@@ -5,7 +5,7 @@ import {Button, Grid} from '@mui/material';
 
 interface IProps {
   person: IPerson,
-  onSuccess: (data: any) => void
+  onSuccess: (data: IPerson) => void
   onCancel: () => void
 }
 

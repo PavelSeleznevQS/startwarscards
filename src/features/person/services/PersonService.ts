@@ -8,6 +8,7 @@ import {
   VehiclesApi,
   SpeciesApi
 } from 'src/generatedAPI';
+import type {AxiosResponse} from "axios";
 
 const peopleApi = new PeopleApi();
 const planetsApi = new PlanetsApi();
@@ -69,10 +70,10 @@ function getPeople({page, search} : PeopleApiGetPeopleRequest) {
     }))
 }
 
-function getListItems(urls: Array<string>, apiMethod: (({id}: {id:string}) => any)) {
+function getListItems<T extends {name?: string, title?: string, url: string}>(urls: Array<string>, apiMethod: (({id}: {id:string}) => Promise<AxiosResponse<T>>)) {
   const ids = urls.map(getIdByUrl);
   return Promise.all(ids.map(id => apiMethod({id})))
-    .then(responses => responses.map(r => ({...r.data, name: r.data.name || r.data.title, id: getIdByUrl(r.data.url)})))
+    .then(responses => responses.map(r => ({...r.data, name: (r.data.name || r.data.title) as string, id: getIdByUrl(r.data.url)})))
 }
 
 function getStarships(urls: Array<string>) {

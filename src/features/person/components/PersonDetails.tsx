@@ -1,13 +1,13 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, ReactNode} from 'react';
 import FieldDetail from 'src/features/person/components/FieldDetail';
-import {INamedEntity, IPerson} from 'src/features/person/services/PersonService';
+import {IPerson} from 'src/features/person/services/PersonService';
 import {Link} from '@mui/material';
 
 interface IProps {
   person: IPerson
 }
 
-const renderLink = ({name, url}: INamedEntity) => <Link href={url}>{name}</Link>
+const renderLink = ({name, url}: {name: string, url: string}) => <Link href={url}>{name}</Link>
 
 const PersonDetails: FC<IProps> = ({person}) => {
   return (
@@ -21,7 +21,7 @@ const PersonDetails: FC<IProps> = ({person}) => {
       {person.homeWorldEntity && (
         <FieldDetail name="Home world"
                      value={{name: person.homeWorldEntity.name, url: `/planets/${person.homeWorldEntity.id}`}}
-                     renderCmp={renderLink} />
+                     renderCmp={renderLink as (val: unknown) => ReactNode} />
       )}
     </>
   );

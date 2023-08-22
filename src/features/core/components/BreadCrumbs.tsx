@@ -1,12 +1,13 @@
-import {memo} from 'react';
+import {memo, ReactNode} from 'react';
 import {useMatches} from 'react-router-dom';
 import {Breadcrumbs} from '@mui/material';
 
+type Crumb = (data: unknown) => ReactNode;
 const BreadCrumbs = () => {
   let matches = useMatches();
   let crumbs = matches
-    .filter((match) => match.handle && (match.handle as any).crumb)
-    .map((match) => (match.handle as any).crumb(match.data));
+    .filter((match) => match.handle && (match.handle as {crumb: Crumb}).crumb)
+    .map((match) => (match.handle as {crumb: Crumb}).crumb(match.data));
 
   return (
     <Breadcrumbs aria-label="breadcrumb">
